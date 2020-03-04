@@ -48,7 +48,7 @@ function promptUser() {
         type: "input",
         name: "github",
         message: `Ok, so your employer is an engineer. What is homie's GitHub username?`,
-        when: function( answers ) {
+        when: function(answers) {
             // Only run if user answered Engineer
             return answers.role === "Engineer";
         },
@@ -57,7 +57,7 @@ function promptUser() {
         type: "input",
         name: "office",
         message: `Great job choosing this dood for manager! Show me the office number!`,
-        when: function( answers ) {
+        when: function(answers) {
             // Only run if user answered Manager
             return answers.role === "Manager";
         },
@@ -66,7 +66,7 @@ function promptUser() {
         type: "input",
         name: "school",
         message: `So little homie is a n00b! I know him or her. What's the school little homie goes to again??`,
-        when: function( answers ) {
+        when: function(answers) {
             // Only run if user answered Intern
             return answers.role === "Intern";
         },
