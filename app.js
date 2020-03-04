@@ -14,6 +14,73 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 ​
+function promptUser() {
+    return inquirer.prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Hello friend! Please enter an employee name."
+      },
+      {
+        type: "list",
+        name: "role",
+        message: "That's a beautiful name! What does this employee do?",
+        choices: [
+            "Manager", 
+            "Engineer", 
+            "Intern",
+          ]
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "That's super cool. How about this dude's email?"
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "Really? Hmm. Well what about the employee ID?"
+      },
+    //   ENGINEER   //
+      {
+        type: "input",
+        name: "github",
+        message: `Ok, so your employer is anengineer. What is ${name}'s email?`
+      },
+    //   MANAGER    //
+      {
+        type: "input",
+        name: "office",
+        message: `Great job coosing ${name} for manager! Show me the office number!`
+      },
+    //   INTERN     //
+      {
+        type: "input",
+        name: "school",
+        message: `So ${name} is a n00b! I know him or her. What's the school ${name} goes to again??`
+      },
+    ]);
+  }
+
+
+function generateHTML(answers) {
+    // compile employee HTML files and append to "main" body
+return 
+}
+
+promptUser()
+.then(function(answers) {
+const html = generateHTML(answers);
+
+return writeFileAsync("index.html", html);
+})
+.then(function() {
+console.log("Successfully wrote to index.html");
+})
+.catch(function(err) {
+console.log(err);
+});
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
@@ -33,3 +100,42 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an 
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work!```
+
+
+
+
+
+// The first class is an `Employee` parent class with the following properties and
+// methods:
+
+// * name
+// * id
+// * email
+// * getName()
+// * getId()
+// * getEmail()
+// * getRole() // Returns 'Employee'
+
+// The other three classes will extend `Employee`. 
+
+// In addition to `Employee`'s properties and methods, `Manager` will also have:
+
+//   * officeNumber
+
+//   * getRole() // Overridden to return 'Manager'
+
+// In addition to `Employee`'s properties and methods, `Engineer` will also have:
+
+//   * github  // GitHub username
+
+//   * getGithub()
+
+//   * getRole() // Overridden to return 'Engineer'
+
+// In addition to `Employee`'s properties and methods, `Intern` will also have:
+
+//   * school 
+
+//   * getSchool()
+
+//   * getRole() // Overridden to return 'Intern'
