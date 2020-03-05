@@ -3,7 +3,7 @@
 // const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 // const path = require("path");
-// const fs = require("fs");
+const fs = require("fs");
 // ​
 // const OUTPUT_DIR = path.resolve(__dirname, "output")
 // const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -71,7 +71,20 @@ function promptUser() {
             return answers.role === "Intern";
         },
       },
-    ]);
+    ]).then(function(data) {
+
+        var filename = data.name.toLowerCase().split(' ').join('') + ".json";
+      
+        fs.writeFile(filename, JSON.stringify(data, null, '\t'), function(err) {
+      
+          if (err) {
+            return console.log(err);
+          }
+      
+          console.log("Success!");
+      
+        });
+      });
   }
 
 
@@ -88,7 +101,7 @@ const html = generateHTML(answers);
 return writeFileAsync("team.html", html);
 })
 .then(function() {
-console.log("Successfully wrote to index.html");
+console.log("Successfully wrote to team.html");
 })
 .catch(function(err) {
 console.log(err);
