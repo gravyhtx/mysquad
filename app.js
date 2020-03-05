@@ -55,7 +55,7 @@ function promptUser() {
       },
       {
         type: "input",
-        name: "office",
+        name: "officeNumber",
         message: `Great job choosing this dood for manager! Show me the office number!`,
         when: function(answers) {
             // Only run if user answered Manager
@@ -73,7 +73,7 @@ function promptUser() {
       },
     ]).then(function(data) {
 
-        var filename = data.name.toLowerCase().split(' ').join('') + ".json";
+        var filename = data.name.split(' ').join('') + ".json";
       
         fs.writeFile(filename, JSON.stringify(data, null, '\t'), function(err) {
       
