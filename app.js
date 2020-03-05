@@ -1,21 +1,21 @@
-// const Manager = require("./lib/Manager");
-// const Engineer = require("./lib/Engineer");
-// const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
-// const fs = require("fs");
+const fs = require("fs");
+const util = require("util");
+// const writeFileAsync = util.promisify(fs.writeFile);
 // ​
 const OUTPUT_DIR = path.resolve(__dirname, "output")
-// const outputPath = path.join(OUTPUT_DIR, "team.html");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-// const render = require("./lib/htmlRenderer");
+const render = require("./lib/htmlRenderer");
 
 
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-
-// NEED TO BE ABLE TO THROW ERRORS FOR INCORRECT ANSWERS
 // 
 function promptUser() {
     return inquirer.prompt([
@@ -50,7 +50,6 @@ function promptUser() {
         message: `Ok, so your employer is an engineer. What is homie's GitHub username?`,
         when: function(answers) {
             // Only run if user answered Engineer
-            getOfficeNumber ()
             return answers.role === "Engineer";
         },
       },
@@ -59,6 +58,7 @@ function promptUser() {
         name: "officeNumber",
         message: `Great job choosing this dood for manager! Show me the office number!`,
         when: function(answers) {
+            // managerIsTrue === true;
             // Only run if user answered Manager
             return answers.role === "Manager";
         },
@@ -73,35 +73,49 @@ function promptUser() {
         },
       },
     ])
-    // .then(function(data) {
 
-    //     var filename = data.name.split(' ').join('') + ".json";
-      
-    //     fs.writeFile(filename, JSON.stringify(data, null, '\t'), function(err) {
-      
-    //       if (err) {
-    //         return console.log(err);
-    //       }
-      
-    //       console.log("Success!");
-      
-    //     });
-    //   });
   }
 
 
+// const main = fs.readFile('./main.html', function read(err, data) {
+//     if (err) {
+//         throw err;
+//     }
+// });
+function writeFileAsync(data) {
+    util.promisify(fs.writeFile)
+}
+function generateHTML(answers) {
+    return fs.readFile('templates/main.html', function read(err, data) {
+            if (err) {
+                throw err;
+            }
+        });
+    }
+
+
+// async function generateHTML() {
+//     try {
+//       const engineer = await readFileAsync("templates/engineer.html", "utf8");
+//       const intern = await readFileAsync("templates/intern.html", "utf8");
+//       const manager = await readFileAsync("templates/manager.html", "utf8");
+  
+//       const main = [engineer, intern, manager].map(JSON.parse);
+  
+//       await writeFileAsync(
+//         "main.html",
+//         JSON.stringify(main, null, 2),
+//         "utf8"
+//       );
+  
+//       console.log("Successfully wrote to 'main.html' file");
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
 
 
 
-
-// const answers = 
-//  new Employee();
-// getName() + getId() + getRole() + getGithub() + getOfficeNumber() + getSchool();
-    // getId();
-    // getEmail();
-    // getRole();
-    // getGithub()
-    // getOfficeNumber();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -123,6 +137,8 @@ console.log("Successfully wrote to team.html");
 .catch(function(err) {
 console.log(err);
 });
+
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
