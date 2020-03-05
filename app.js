@@ -2,12 +2,12 @@
 // const Engineer = require("./lib/Engineer");
 // const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
-// const path = require("path");
-const fs = require("fs");
+const path = require("path");
+// const fs = require("fs");
 // ​
-// const OUTPUT_DIR = path.resolve(__dirname, "output")
+const OUTPUT_DIR = path.resolve(__dirname, "output")
 // const outputPath = path.join(OUTPUT_DIR, "team.html");
-// ​
+
 // const render = require("./lib/htmlRenderer");
 
 
@@ -50,6 +50,7 @@ function promptUser() {
         message: `Ok, so your employer is an engineer. What is homie's GitHub username?`,
         when: function(answers) {
             // Only run if user answered Engineer
+            getOfficeNumber ()
             return answers.role === "Engineer";
         },
       },
@@ -71,22 +72,36 @@ function promptUser() {
             return answers.role === "Intern";
         },
       },
-    ]).then(function(data) {
+    ])
+    // .then(function(data) {
 
-        var filename = data.name.split(' ').join('') + ".json";
+    //     var filename = data.name.split(' ').join('') + ".json";
       
-        fs.writeFile(filename, JSON.stringify(data, null, '\t'), function(err) {
+    //     fs.writeFile(filename, JSON.stringify(data, null, '\t'), function(err) {
       
-          if (err) {
-            return console.log(err);
-          }
+    //       if (err) {
+    //         return console.log(err);
+    //       }
       
-          console.log("Success!");
+    //       console.log("Success!");
       
-        });
-      });
+    //     });
+    //   });
   }
 
+
+
+
+
+
+// const answers = 
+//  new Employee();
+// getName() + getId() + getRole() + getGithub() + getOfficeNumber() + getSchool();
+    // getId();
+    // getEmail();
+    // getRole();
+    // getGithub()
+    // getOfficeNumber();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -94,6 +109,8 @@ function promptUser() {
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
+
+
 promptUser()
 .then(function(answers) {
 const html = generateHTML(answers);
